@@ -66,7 +66,7 @@ this.$ = this.jQuery = jQuery.noConflict(true);
     }
 
     function monitorGivePointsActivity() {
-        $(".successButton").click(function() {
+        $("#successButton").click(function() {
             data.metrics.clickedGivePoints = true;
         });
     }
