@@ -41,8 +41,8 @@ this.$ = this.jQuery = jQuery.noConflict(true);
             fields: stepWrappers,
             reportInterval: 1,
             percentOnScreen: "75%",
-            callback: function(data, log) {
-                data.metrics.stepTimeSpent = log;
+            callback: function(stData, stLog) {
+                data.metrics.stepTimeSpent = stLog;
             }
         });
 
