@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         iFixitClientMetrics
 // @namespace    https://www.ifixit.com
-// @version      0.1
+// @version      0.2
 // @description  Tracks anonymized metrics on iFixit
 // @author       CSC 484 - Cal Poly
 // @match        https://www.ifixit.com/Guide/*
