@@ -58,7 +58,7 @@ this.$ = this.jQuery = jQuery.noConflict(true);
     function monitorStepThumbnailActivity() {
         $(".step-thumbnail").each(function() {
             var thumbnailId = $(this).attr("data-fullimg");
-            metrics.stepThumbnailHoverCount[thumbnailId] = 0;
+            data.metrics.stepThumbnailHoverCount[thumbnailId] = 0;
             $(this).on("mouseenter",function(){
                data.metrics.stepThumbnailHoverCount[thumbnailId]++;
             });
