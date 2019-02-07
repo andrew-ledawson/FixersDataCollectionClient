@@ -1,9 +1,9 @@
 // ==UserScript==
-// @name         iFixit
-// @namespace    http://tampermonkey.net/
+// @name         iFixitClientMetrics
+// @namespace    https://www.ifixit.com
 // @version      0.1
-// @description  try to take over the world!
-// @author       You
+// @description  Tracks anonymized metrics on iFixit
+// @author       CSC 484 - Cal Poly
 // @match        https://www.ifixit.com/Guide/*
 // @require      jquery-3.3.1.min.js
 // @require      screentime.js
