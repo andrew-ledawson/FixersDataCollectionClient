@@ -71,13 +71,15 @@ this.$ = this.jQuery = jQuery.noConflict(true);
         });
     }
 
-    monitorStepTimeActivity();
-    monitorStepThumbnailActivity();
-    monitorGivePointsActivity();
+    window.addEventListener('load', function() {
+        monitorStepTimeActivity();
+        monitorStepThumbnailActivity();
+        monitorGivePointsActivity();
 
-    setInterval(function() {
-        console.log(data);
-        //Send Metrics!
-    }, 5000)
+        setInterval(function() {
+            console.log(data);
+            //Send Metrics!
+        }, 5000)
+    })
 
 })();
