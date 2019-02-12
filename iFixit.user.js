@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         iFixitClientMetrics
 // @namespace    https://www.ifixit.com
-// @version      0.2.3
+// @version      0.2.4
 // @description  Tracks anonymized metrics on iFixit
 // @author       CSC 484 - Cal Poly
 // @match        https://www.ifixit.com/Guide/*
@@ -25,24 +25,32 @@ this.$ = this.jQuery = jQuery.noConflict(true);
         metrics: {
             stepTimeSpent : {},
             stepThumbnailHoverCount : {},
-            clickedGivePoints : false
+            clickedGivePoints : false,
+            commentsTimeSpent: 0
         }
     }
 
-    function monitorStepTimeActivity() {
+    function monitorPageSectionTimeActivity() {
         var stepWrappers = $(".step-wrapper").map(function() {
             return {
                 selector: "#"+$(this).attr("id"),
-                name: "#"+$(this).attr("id")
+                name: $(this).attr("id")
             }
         }).get();
 
+        stepWrappers.push({
+            selector: "#guide-comments-container",
+            name: "guide-comments-container"
+        })
+
         $.screentime({
             fields: stepWrappers,
-            reportInterval: 1,
+            reportInterval: .25,
             percentOnScreen: "75%",
             callback: function(stData, stLog) {
-                data.metrics.stepTimeSpent = stLog;
+                data.metrics.stepTimeSpent = JSON.parse(JSON.stringify(stLog));
+                data.metrics.commentsTimeSpent = data.metrics.stepTimeSpent["guide-comments-container"];
+                delete data.metrics.stepTimeSpent["guide-comments-container"];
             }
         });
 
@@ -72,7 +80,7 @@ this.$ = this.jQuery = jQuery.noConflict(true);
     }
 
     window.addEventListener('load', function() {
-        monitorStepTimeActivity();
+        monitorPageSectionTimeActivity();
         monitorStepThumbnailActivity();
         monitorGivePointsActivity();
 
