@@ -18,7 +18,7 @@
     // Browser globals
     factory(jQuery);
   }
-}(function($) {
+}(function(jQuery) {
 
   /* Screentime */
 
@@ -30,8 +30,8 @@
     callback: function(){}
   };
 
-  $.screentime = function(options) {
-    options = $.extend({}, defaults, options);
+  jQuery.screentime = function(options) {
+    options = jQuery.extend({}, defaults, options);
 
     // Convert perecent string to number
     options.percentOnScreen = parseInt(options.percentOnScreen.replace('%', ''), 10);
@@ -89,22 +89,22 @@
 
     function Field(elem) {
       this.selector = elem.selector;
-      $elem = this.$elem = $(elem.selector);
+      jQueryelem = this.jQueryelem = jQuery(elem.selector);
       this.name = elem.name;
 
-      this.top = $elem.offset().top;
-      this.height = $elem.height();
+      this.top = jQueryelem.offset().top;
+      this.height = jQueryelem.height();
       this.bottom = this.top + this.height;
-      this.width = $elem.width();
+      this.width = jQueryelem.width();
     }
 
     function Viewport() {
-      var $window = $(window);
+      var jQuerywindow = jQuery(window);
 
-      this.top = $window.scrollTop();
-      this.height = $window.height();
+      this.top = jQuerywindow.scrollTop();
+      this.height = jQuerywindow.height();
       this.bottom = this.top + this.height;
-      this.width = $window.width();
+      this.width = jQuerywindow.width();
     }
 
     /*
@@ -153,7 +153,7 @@
     function checkViewport() {
       var viewport = new Viewport();
 
-      $.each(cache, function(key, val) {
+      jQuery.each(cache, function(key, val) {
         if (onScreen(viewport, val)) {
           log[key] += 1;
           counter[key] += 1;
@@ -166,7 +166,7 @@
 
       var data = {};
 
-      $.each(counter, function(key, val) {
+      jQuery.each(counter, function(key, val) {
         if (val > 0) {
           data[key] = val;
           
@@ -181,7 +181,7 @@
         }
       });
 
-      if (!$.isEmptyObject(data)) {
+      if (!jQuery.isEmptyObject(data)) {
         options.callback.call(this, data, log);
       }
 
@@ -209,18 +209,18 @@
       clearInterval(reporter);
     }
 
-    $.screentime.pauseTimers = function() {
+    jQuery.screentime.pauseTimers = function() {
         stopTimers();
     }
 
-    $.screentime.resumeTimers = function() {
+    jQuery.screentime.resumeTimers = function() {
         startTimers();
     }
 
-    $.screentime.reset = function() {
+    jQuery.screentime.reset = function() {
       stopTimers();
 
-      $.each(cache, function(key, val) {
+      jQuery.each(cache, function(key, val) {
         log[key] = 0;
         counter[key] = 0;
       });
@@ -230,8 +230,8 @@
 
     function init() {
 
-      $.each(options.fields, function(index, elem) {
-        if ($(elem.selector).length) {
+      jQuery.each(options.fields, function(index, elem) {
+        if (jQuery(elem.selector).length) {
           var field = new Field(elem);
           cache[field.name] = field;
           counter[field.name] = 0;
@@ -250,9 +250,9 @@
         startTimers();
       });
       
-      $( window ).resize(function() {
-          $.each(options.fields, function(index, elem) {
-              if ($(elem.selector).length) {
+      jQuery( window ).resize(function() {
+          jQuery.each(options.fields, function(index, elem) {
+              if (jQuery(elem.selector).length) {
                   var field = new Field(elem);
                   cache[field.name] = field;
               }

@@ -1,18 +1,4 @@
-// ==UserScript==
-// @name         iFixitClientMetrics
-// @namespace    https://www.ifixit.com
-// @version      0.2.4
-// @description  Tracks anonymized metrics on iFixit
-// @author       CSC 484 - Cal Poly
-// @match        https://www.ifixit.com/Guide/*
-// @require      jquery-3.3.1.min.js
-// @require      screentime.js
-// @require      ifvisible.min.js
-// @require      browser-cuid.min.js
-// @grant        none
-// ==/UserScript==
-
-this.$ = this.jQuery = jQuery.noConflict(true);
+this.jQuery = jQuery.noConflict(true);
 
 (function() {
     'use strict';
@@ -31,10 +17,10 @@ this.$ = this.jQuery = jQuery.noConflict(true);
     }
 
     function monitorPageSectionTimeActivity() {
-        var stepWrappers = $(".step-wrapper").map(function() {
+        var stepWrappers = jQuery(".step-wrapper").map(function() {
             return {
-                selector: "#"+$(this).attr("id"),
-                name: $(this).attr("id")
+                selector: "#"+jQuery(this).attr("id"),
+                name: jQuery(this).attr("id")
             }
         }).get();
 
@@ -43,7 +29,7 @@ this.$ = this.jQuery = jQuery.noConflict(true);
             name: "guide-comments-container"
         })
 
-        $.screentime({
+        jQuery.screentime({
             fields: stepWrappers,
             reportInterval: .25,
             percentOnScreen: "75%",
@@ -55,26 +41,26 @@ this.$ = this.jQuery = jQuery.noConflict(true);
         });
 
         ifvisible.on("idle", function(){
-            $.screentime.pauseTimers();
+            jQuery.screentime.pauseTimers();
         });
 
         ifvisible.on("wakeup", function(){
-            $.screentime.resumeTimers();
+            jQuery.screentime.resumeTimers();
         });
     }
 
     function monitorStepThumbnailActivity() {
-        $(".step-thumbnail").each(function() {
-            var thumbnailId = $(this).attr("data-fullimg");
+        jQuery(".step-thumbnail").each(function() {
+            var thumbnailId = jQuery(this).attr("data-fullimg");
             data.metrics.stepThumbnailHoverCount[thumbnailId] = 0;
-            $(this).on("mouseenter",function(){
+            jQuery(this).on("mouseenter",function(){
                data.metrics.stepThumbnailHoverCount[thumbnailId]++;
             });
         });
     }
 
     function monitorGivePointsActivity() {
-        $("#successButton").click(function() {
+        jQuery("#successButton").click(function() {
             data.metrics.clickedGivePoints = true;
         });
     }

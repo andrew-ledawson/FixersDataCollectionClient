@@ -1,0 +1,22 @@
+{
+  "name": "fixersdatacollectionclient",
+  "version": "1.0.0",
+  "description": "##### For development and early distribution purposes, the plugin is implemented as a Userscript. Make sure your have the [Tampermonkey](https://tampermonkey.net/) extension installed in your browser and then click the link below to install FixersDataCollectionClient.",
+  "main": "dist/bundle.min.js",
+  "dependencies": {},
+  "devDependencies": {
+  },
+  "scripts": {
+    "build": "cat src/userscript-header.js src/jquery-3.3.1.min.js src/ifvisible.min.js src/browser-cuid.min.js src/screentime.js src/iFixit.js > dist/bundle.user.js && cat src/jquery-3.3.1.min.js src/ifvisible.min.js src/browser-cuid.min.js src/screentime.js src/iFixit.js > dist/bundle.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andrew-ledawson/FixersDataCollectionClient.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andrew-ledawson/FixersDataCollectionClient/issues"
+  },
+  "homepage": "https://github.com/andrew-ledawson/FixersDataCollectionClient#readme"
+}
