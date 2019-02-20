@@ -345,7 +345,13 @@ this.jQuery = jQuery.noConflict(true);
 
         setInterval(function() {
             console.log(data);
-            //Send Metrics!
+            jQuery.ajax({
+                type: 'POST',
+                url: '/metrics', //TODO: Replace with correct url
+                data: JSON.stringify(data),
+                contentType: "application/json",
+                dataType: 'json'
+            });
         }, 5000)
     })
 
