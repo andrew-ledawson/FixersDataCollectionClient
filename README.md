@@ -11,8 +11,11 @@ FixersDataCollectionClient will autoupdate in Tampermonkey by default every 7 da
 ##### Development
 You will need npm installed on your machine in order to build the final bundle.
 All source files are in `src/`.
-After editing the respective files, run `npm run-script build`.
+Edit the respective files
+You will have to bump the version number in userscript-header.js to force already installed userscripts to automatically update.
+Run `npm run-script build`.
 This will create two files `dist/bundle.js` and `dist/bundle.user.js`.
+
 
 ##### Release
 * `dist/bundle.js` This file can be copied and included in the webpage for tracking
