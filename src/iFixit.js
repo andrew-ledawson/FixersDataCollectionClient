@@ -3,6 +3,8 @@ this.jQuery = jQuery.noConflict(true);
 (function() {
     'use strict';
 
+    var oldData = {};
+
     var data = {
         meta: {
             sessionId : cuid(),
@@ -71,14 +73,19 @@ this.jQuery = jQuery.noConflict(true);
         monitorGivePointsActivity();
 
         setInterval(function() {
-            console.log(data);
-            jQuery.ajax({
-                type: 'POST',
-                url: '/metrics', //TODO: Replace with correct url
-                data: JSON.stringify(data),
-                contentType: "application/json",
-                dataType: 'json'
-            });
+            if(oldData !== JSON.stringify(data)) {
+                oldData = JSON.stringify(data);
+                jQuery.ajax({
+                    type: 'POST',
+                    url: '/metrics', //TODO: Replace with correct url
+                    data: JSON.stringify(data),
+                    contentType: "application/json",
+                    dataType: 'json'
+                });
+                console.debug(data);
+            } else {
+                console.debug("No data change");
+            }
         }, 5000)
     })
 
