@@ -276,7 +276,7 @@ this.jQuery = jQuery.noConflict(true);
 (function() {
     'use strict';
 
-    var oldData = {};
+    var oldData = "";
 
     var data = {
         meta: {
@@ -314,6 +314,8 @@ this.jQuery = jQuery.noConflict(true);
                 delete data.metrics.stepTimeSpent["guide-comments-container"];
             }
         });
+
+        ifvisible.setIdleDuration(120);
 
         ifvisible.on("idle", function(){
             jQuery.screentime.pauseTimers();

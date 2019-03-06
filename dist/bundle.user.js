@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         iFixitClientMetrics
 // @namespace    https://www.ifixit.com
-// @version      1.0.0
+// @version      1.1.0
 // @description  Tracks anonymized metrics on iFixit
 // @author       CSC 484 - Cal Poly
 // @match        https://www.ifixit.com/Guide/*
@@ -285,7 +285,7 @@ this.jQuery = jQuery.noConflict(true);
 (function() {
     'use strict';
 
-    var oldData = {};
+    var oldData = "";
 
     var data = {
         meta: {
@@ -323,6 +323,8 @@ this.jQuery = jQuery.noConflict(true);
                 delete data.metrics.stepTimeSpent["guide-comments-container"];
             }
         });
+
+        ifvisible.setIdleDuration(120);
 
         ifvisible.on("idle", function(){
             jQuery.screentime.pauseTimers();
