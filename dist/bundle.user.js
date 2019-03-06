@@ -291,6 +291,7 @@ this.jQuery = jQuery.noConflict(true);
         meta: {
             sessionId : cuid(),
             page : window.location.pathname,
+            time: null
         },
         metrics: {
             stepTimeSpent : {},
@@ -357,8 +358,10 @@ this.jQuery = jQuery.noConflict(true);
         monitorGivePointsActivity();
 
         setInterval(function() {
+            data.meta.time = null;
             if(oldData !== JSON.stringify(data)) {
                 oldData = JSON.stringify(data);
+                data.meta.time = Date.now();
                 jQuery.ajax({
                     type: 'POST',
                     url: '/metrics', //TODO: Replace with correct url
